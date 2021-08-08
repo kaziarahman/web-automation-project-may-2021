@@ -40,8 +40,8 @@ public class TestBase {
     public static String browserStackUserName = "";
     public static String browserStackKey = "";
     //http:// + username + : + key + specific url for cloud
-    public static String SAUCE_URL = "http://" + sauceUserName + ":" + sauceKey + "@ondemand.saucelabs.com:80/wd/hub";
-    public static String BROWERSTACK_URL = "https://" + browserStackUserName + ":" + browserStackKey + "@hub-cloud.browserstack.com/wd/hub";
+    public static String SAUCE_URL = "https://" + sauceUserName + ":" + sauceKey + "@ondemand.saucelabs.com:80/wd/hub";
+    public static String BROWSERSTACK_URL = "https://" + browserStackUserName + ":" + browserStackKey + "@hub-cloud.browserstack.com/wd/hub";
     private static Logger LOGGER = Logger.getLogger(TestBase.class);
 
 
@@ -95,6 +95,8 @@ public class TestBase {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         return driver;
+
+
     }
 
     /**
@@ -117,7 +119,7 @@ public class TestBase {
         if (envName.equalsIgnoreCase("saucelabs")) {
             driver = new RemoteWebDriver(new URL(SAUCE_URL), desiredCapabilities);
         } else if (envName.equalsIgnoreCase("browserstack")) {
-            driver = new RemoteWebDriver(new URL(BROWERSTACK_URL), desiredCapabilities);
+            driver = new RemoteWebDriver(new URL(BROWSERSTACK_URL), desiredCapabilities);
         }
         return driver;
     }
@@ -166,6 +168,8 @@ public class TestBase {
             System.out.println("Exception while taking screenshot " + e.getMessage());
         }
     }
+
+
 
     public static void clickOnId(String id) {
         driver.findElement(By.id(id)).click();
@@ -241,6 +245,9 @@ public class TestBase {
         driver.quit();
         LOGGER.info("driver closed");
     }
+
+
+    
 
     public void typeOnXpath(String xpath, String data) {
         driver.findElement(By.xpath(xpath)).sendKeys(data);
